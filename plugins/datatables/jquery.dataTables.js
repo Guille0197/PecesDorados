@@ -11399,7 +11399,7 @@
 				 *  @default Next
 				 *
 				 *  @dtopt Language
-				 *  @name DataTable.defaults.language.paginate.next
+				 *  @name DataTable.defaults.language.paginate.Next
 				 *
 				 *  @example
 				 *    $(document).ready( function() {

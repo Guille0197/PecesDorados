@@ -1,5 +1,7 @@
 <?php
 include("funcionesSQL/atletaSQL.php");
+
+//@$cedula = "7-711-8152"; Variable global
 ?>
 
 <!DOCTYPE html>
@@ -101,20 +103,35 @@ include("funcionesSQL/atletaSQL.php");
 
                     <div class="form-group">
                       <form method="POST" action="atletaInscripcion.php">
-                        <select class="form-control form-control-sm" required="require">
+                        <select class="form-control form-control-sm" required="require" name="curso">
+                          <option selected default hidden></option>
                           <?php
                           $carrerabd = AtletaSQL::obtenerCurso();
                           foreach ($carrerabd as $key => $value) {
-                            $codcar = $value['idcurso'];
+                            $idcurso = $value['idcurso'];
 
-                            echo "<option value=$codcar>$codcar</option>";
+                            echo "<option value=$idcurso>$idcurso</option>";
                           }
                           ?>
                         </select>
 
 
                         <br>
-                        <input class="btn btn-warning" type="submit" value="Inscribir">
+
+
+                        <!-- php aqui  -->
+                        <?php
+                          @$guardarInscripcion = $_POST["guardar"];
+                          @$valorSelectCurso = $_POST["curso"];
+
+                          if (@$guardarInscripcion) {
+
+                            AtletaSQL::inscribirAtleta($cedula, $valorSelectCurso);
+                          }
+
+                        ?>
+                        <input class='btn btn-warning' type='submit' name='guardar' value='Inscribir'>
+
                       </form>
                     </div>
 
@@ -148,40 +165,40 @@ include("funcionesSQL/atletaSQL.php");
                       </tr>
                     </thead>
                     <tbody>
-                  
+
 
                       <?php
-                      //@$cedula = "6-719-1951"; REMPLAZAR POR LA VARIABLE GLOBAL DE CEDULA
-                      //Toma el valor de la cedula con la que se logueo
-                      $registro = AtletaSQL::obtenerCursos($cedula); 
-                    
+                          //@$cedula = "6-719-1951"; REMPLAZAR POR LA VARIABLE GLOBAL DE CEDULA
+                          //Toma el valor de la cedula con la que se logueo
+                          $registro = AtletaSQL::obtenerCursos($cedula);
 
-                      foreach ($registro as $key => $data) {
-                        $codigoCurso = $data['idcur'];
-                        $horarioCurso = $data['horariocurso'];
-                        $entrenadorCodigo = $data['nombreentrenador'];
-                        ?>
+
+                          foreach ($registro as $key => $data) {
+                            $codigoCurso = $data['codicurso'];
+                            $horarioCurso = $data['horariocurso'];
+                            $entrenadorCodigo = $data['nombreentrenador'];
+                      ?>
 
                         <!-- echo "<td > $codigoCurso </td ";
                         echo "<td >$horarioCurso </td>";
                         echo "<td >$entrenadorCodigo </td> "; -->
                         <tr>
 
-                        <td> <?php echo $codigoCurso; ?> </td>
-                        <td> <?php echo $horarioCurso; ?> </td>
-                        <td> <?php echo $entrenadorCodigo; ?> </td>
+                          <td> <?php echo $codigoCurso; ?> </td>
+                          <td> <?php echo $horarioCurso; ?> </td>
+                          <td> <?php echo $entrenadorCodigo; ?> </td>
                         </tr>
 
                       <?php
 
-                      }
+                              }
 
 
                       ?>
 
 
 
-                   
+
 
                     </tbody>
 

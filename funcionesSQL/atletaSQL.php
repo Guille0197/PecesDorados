@@ -26,11 +26,12 @@ class AtletaSQL
     {
         try {
             $pdo = BaseDeDatos::obtenerBD()->obtenerConexion();
-            $sql = "SELECT DISTINCT  idcur,horariocurso,nombreentrenador    from atletas,asistencia,cursos,entrenadores,registroatletacurso where ceduatleta= '6-719-1951' AND idcur=cursos.idcurso AND cursos.codentrenador = entrenadores.cedulaentrenador";
-            $sentencia = $pdo->prepare($sql);  
+            $sql = "SELECT  DISTINCT  registroatletacurso.codicurso, cursos.horariocurso, entrenadores.nombreentrenador
+            from registroatletacurso,cursos,entrenadores
+            WHERE registroatletacurso.ceduatleta = ? AND registroatletacurso.codicurso = cursos.idcurso AND entrenadores.cedulaentrenador = cursos.codentrenador";
+            $sentencia = $pdo->prepare($sql);
             $sentencia->execute(array($cedula));
             return $sentencia->fetchAll(PDO::FETCH_ASSOC);
-         
         } catch (PDOException $e) {
             return $e;
         }
@@ -44,6 +45,22 @@ class AtletaSQL
             $sentencia = $pdo->prepare($sql);
             $sentencia->execute();
             return $sentencia->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            return $e;
+        }
+    }
+
+
+    //se inscribe el atleta al curso
+    public static function inscribirAtleta($cedula, $curso)
+    {
+        try {
+
+            $pdo = BaseDeDatos::obtenerBD()->obtenerConexion();
+            $sql = "INSERT INTO registroatletacurso(ceduatleta,codicurso) values(?,?)";
+            $sentencia = $pdo->prepare($sql);
+            $sentencia->execute(array($cedula, $curso));
+            return $pdo->lastInsertId();
         } catch (PDOException $e) {
             return $e;
         }

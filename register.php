@@ -79,7 +79,7 @@ if(isset($_POST['Registrar'])){
                 <div class="card-body register-card-body">
                     <p class="login-box-msg"><strong>Registrate como nuevo usuario</strong></p>
 
-                    <p class="text-center p-2"> Ya tengo una cuenta,
+                    <p class="text-center p-2"> Si ya tienes una cuenta,
                         <a href="login.php" class="text-center"> Iniciar Sesión</a>
                     </p>
 

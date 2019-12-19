@@ -4,15 +4,15 @@ require_once("BaseDeDatos.php"); //Trae la conexion a la base de datos junto con
 class AtletaSQL
 {
 
-    public static function obtenerHistorialPago($cedula)
+    public static function obtenerHistorialPago()
     {
         try {
             $pdo = BaseDeDatos::obtenerBD()->obtenerConexion();
             $sql = "SELECT DISTINCT pagos.numerorecibo,pagos.fecha, pagos.idcur, pagos.monto
             from pagos,atletas,adultoresponsable 
-            where cedulaatleta = ? and atletas.idrespo = pagos.idrespon";
+            where cedulaatleta = '6-719-1951' and atletas.idrespo = pagos.idrespon";
             $sentencia = $pdo->prepare($sql);
-            $sentencia->execute(array($cedula));
+            $sentencia->execute();
             return $sentencia->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             return $e;
@@ -66,33 +66,20 @@ class AtletaSQL
         }
     }
 
-    public static function registrarAdulto($cedula, $nombre, $parentesco, $celular, $edad)
+    public static function validacionAtleta($cedula, $curso)
     {
         try {
 
             $pdo = BaseDeDatos::obtenerBD()->obtenerConexion();
-            $sql = "INSERT INTO adultoresponsable(idadulto,nombreadulto,parentescoadulto,celularadulto,edadadulto) values(?,?,?,?,?)";
+            $sql = "SELECT ceduatleta, codicurso from registroatletacurso";
             $sentencia = $pdo->prepare($sql);
-            $sentencia->execute(array($cedula, $nombre, $parentesco, $celular, $edad));
-            return $pdo->lastInsertId();
+            $sentencia->execute(array($cedula, $curso));
+            return $sentencia->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             return $e;
         }
     }
 
-
-    public static function registrarAtleta($cedula, $nombre, $edad, $nadar, $direccion, $responsable, $curso)
-    {
-        try {
-
-            $pdo = BaseDeDatos::obtenerBD()->obtenerConexion();
-            $sql = "INSERT INTO atletas(cedulaatleta,nombreatleta,edadatleta,nadar,direccion,idrespo,idcur) values(?,?,?,?,?,?,?)";
-            $sentencia = $pdo->prepare($sql);
-            echo $sql;
-            $sentencia->execute(array($cedula, $nombre, $edad, $nadar, $direccion, $responsable, $curso));
-            return $pdo->lastInsertId();
-        } catch (PDOException $e) {
-            return $e;
-        }
-    }
 }
+?>
+

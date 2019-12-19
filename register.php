@@ -5,6 +5,7 @@ if(isset($_POST['Registrar'])){
   try {
     $usuario=$_POST['usuario'];
     $password=$_POST['password'];
+    $repet_password=$_POST['repet_password'];
     $cedula=$_POST['cedula'];
     $edad=$_POST['edad'];
     $tipo=4; // Tipo de rol Atleta para todo quien se registra por medio de este formulario sera de rol Atleta
@@ -18,6 +19,13 @@ if(isset($_POST['Registrar'])){
             if($pdoExec){
                 header('location: atleta.php');
             }   
+        }else{
+            ?>
+            <script>
+                alert("⚠ ERROR: las contraseñas no son iguales ⚠");
+                window.location="register.php";
+            </script>
+        <?php   
         }
 
   } catch (Exception $exc) {

@@ -45,7 +45,7 @@
         <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                 <img src="dist/img/user2-160x160.jpg" class="user-image img-circle elevation-2" alt="User Image" />
-                <span class="d-none d-md-inline">Alexander Pierce</span>
+                <span class="d-none d-md-inline"><?php echo "variable global aqui";  ?></span>
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <!-- User image -->
@@ -53,14 +53,14 @@
                     <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
                     <!-- Aqui ira la imagen del usuario con el cual se registro -->
 
-                    <h3>Alexander Pierce</h3>
+                    <h3><?php echo  "variable global" ?></h3>
                     <!-- Aqui ira el nombre del usuario con el cual se registro -->
                 </li>
                 <!-- Menu Body -->
                 <li class="user-body">
                     <div class="row">
                         <div class="col-12 text-center">
-                            <h3>Administrador</h3>
+                            <h3><?php echo "Rol";  ?></h3>
                             <!-- Aqui ira el rol del usuario con el cual se registro -->
                         </div>
                     </div>

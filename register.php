@@ -1,32 +1,30 @@
 <?php
-
+include_once 'funcionesSQL/BaseDeDatos.php';
 
 if(isset($_POST['Registrar'])){
   try {
-    include_once 'funcionesSQL/BaseDeDatos.php';
+    $usuario=$_POST['usuario'];
+    $password=$_POST['password'];
+    $cedula=$_POST['cedula'];
+    $edad=$_POST['edad'];
+    $tipo=4; // Tipo de rol Atleta para todo quien se registra por medio de este formulario sera de rol Atleta
+
+        if ($password == $repet_password ) {
+            $pdoQuery='INSERT INTO usuarios(usuario,password,cedula,edad,rol_id) VALUES(:usuario, :password, :cedula, :edad, :rol_id)';
+            $db = new BaseDeDatos();
+            $pdoResult=$db->obtenerConexion()->prepare($pdoQuery);
+            $pdoExec= $pdoResult->execute([':usuario' => $usuario, ':password' => $password, ':cedula' => $cedula, ':edad' => $edad, ':rol_id'=>$tipo ]);
+        
+            if($pdoExec){
+                header('location: atleta.php');
+            }   
+        }
+
   } catch (Exception $exc) {
     echo $exc->getMessage();
     exit();
   } 
-  $usuario=$_POST['usuario'];
-  $password=$_POST['password'];
-  $cedula=$_POST['cedula'];
-  $edad=$_POST['edad'];
-  $tipo=1;
-
-  $pdoQuery='INSERT INTO usuarios(usuario,password,cedula,edad,rol_id) VALUES(:usuario, :password, :cedula, :edad, :rol_id)';
-  $db = new BaseDeDatos();
-  $pdoResult=$db->obtenerConexion()->prepare($pdoQuery);
-  $pdoExec= $pdoResult->execute([':usuario' => $usuario, ':password' => $password, ':cedula' => $cedula, ':edad' => $edad, ':rol_id'=>$tipo ]);
-
-  if($pdoExec){
-    header('location: login.php');
-  }else{
-
-  }
-
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -77,7 +75,7 @@ if(isset($_POST['Registrar'])){
                         <a href="login.php" class="text-center"> Iniciar Sesión</a>
                     </p>
 
-                    <form action="#" method="post">
+                    <form action="#" method="POST">
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" name="usuario" placeholder="Nombre del Atleta" required>
                             <div class="input-group-append">
@@ -111,7 +109,7 @@ if(isset($_POST['Registrar'])){
                         </div>
                         </div>
                         <div class="input-group mb-3">
-                            <input type="password" class="form-control" placeholder="Repetir Contraseña" required>
+                            <input type="password" class="form-control" name="repet_password" placeholder="Repetir Contraseña" required>
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-lock"></span>
@@ -129,7 +127,7 @@ if(isset($_POST['Registrar'])){
                             </div>
                             <!-- /.col -->
                             <div class="col-12">
-                                <button type="submit" class="btn btn-primary btn-block btn-lg"><b>Registrate</b> <i class="nav-icon fas fa-fish text-warning"></i> </button>
+                                <button type="submit" class="btn btn-primary btn-block btn-lg" name="Registrar"><b>Registrate</b> <i class="nav-icon fas fa-fish text-warning"></i> </button>
                             </div>
                             <!-- /.col -->
                         </div>

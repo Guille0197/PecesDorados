@@ -16,6 +16,8 @@ session_start();
    
 </head>
 <body>
-<p>usuario</p>
+<p>usuario atlteta</p>
+
+<a href="cerrar.php">xxxxxxxxxxxx</a>
 </body>
 </html>

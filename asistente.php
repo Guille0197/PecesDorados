@@ -19,6 +19,8 @@ session_start();
     <title>Secretaria</title>
 </head>
 <body>
+    Hola hola
     
+<a href="cerrar.php">xxxxxxxxxxxx</a>
 </body>
 </html>

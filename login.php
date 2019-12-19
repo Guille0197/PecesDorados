@@ -1,36 +1,6 @@
 <?php
 include_once 'funcionesSQL/BaseDeDatos.php';
 session_start();
-  
-  if (isset($_GET['cerrar_sesion'])){
-    session_unset();
-    session_destroy();
-    header('location: login.php');
-  }
-
-  if(isset($_SESSION['rol'])){
-
-    switch ($_SESSION['rol']) {
-      case 1:
-
-          header('location: indexAdmin.php');
-        break;
-        case 2:
-          header('location: atleta.php');
-        break;
-
-        case 3:
-
-          header('location: asistente.php');
-        break;
-        case 4:
-          header('location: cajero.php');
-        break;
-      
-      default:
-       
-    }
-  }
 
   if (isset($_POST['usuario'])&& isset($_POST['password']) ){
     $usuario = $_POST['usuario'];
@@ -45,26 +15,26 @@ session_start();
     $rol = $row [5];
     $_SESSION['rol'] = $rol;
 
+    //Segun el rol le presenta la pagina deacuerdo al rol del usuario
     switch ($_SESSION['rol']) {
       case 1:
           header('location: indexAdmin.php');
         break;
         case 2:
-            header('location: atleta.php');
+            header('location: cajero.php');
           break;
           case 3:
             header('location: asistente.php');
           break;
           case 4:
-            header('location: cajero.php');
+            header('location: atleta.php');
           break;
-      
       default:
-       
     }
 
-  }else{
-    echo "Este usuario y/o conraseña son incorrectos";
+  }
+  else{
+    echo"xxxx";
   }
 }
 

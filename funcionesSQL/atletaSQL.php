@@ -4,15 +4,15 @@ require_once("BaseDeDatos.php"); //Trae la conexion a la base de datos junto con
 class AtletaSQL
 {
 
-    public static function obtenerHistorialPago()
+    public static function obtenerHistorialPago($cedula)
     {
         try {
             $pdo = BaseDeDatos::obtenerBD()->obtenerConexion();
             $sql = "SELECT DISTINCT pagos.numerorecibo,pagos.fecha, pagos.idcur, pagos.monto
             from pagos,atletas,adultoresponsable 
-            where cedulaatleta = '6-719-1951' and atletas.idrespo = pagos.idrespon";
+            where cedulaatleta = ? and atletas.idrespo = pagos.idrespon";
             $sentencia = $pdo->prepare($sql);
-            $sentencia->execute();
+            $sentencia->execute(array($cedula));
             return $sentencia->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             return $e;
@@ -81,8 +81,35 @@ class AtletaSQL
     }
 
 
+    public static function registrarAdulto($cedula, $nombre, $parentesco, $celular, $edad)
+    {
+        try {
+            $pdo = BaseDeDatos::obtenerBD()->obtenerConexion();
+            $sql = "INSERT INTO adultoresponsable(idadulto,nombreadulto,parentescoadulto,celularadulto,edadadulto) values(?,?,?,?,?)";
+            $sentencia = $pdo->prepare($sql);
+            $sentencia->execute(array($cedula, $nombre, $parentesco, $celular, $edad));
+            return $pdo->lastInsertId();
+        } catch (PDOException $e) {
+            return $e;
+        }
+    }
+    public static function registrarAtleta($cedula, $nombre, $edad, $nadar, $direccion, $responsable, $curso)
+    {
+        try {
+            $pdo = BaseDeDatos::obtenerBD()->obtenerConexion();
+            $sql = "INSERT INTO atletas(cedulaatleta,nombreatleta,edadatleta,nadar,direccion,idrespo,idcur) values(?,?,?,?,?,?,?)";
+            $sentencia = $pdo->prepare($sql);
+            echo $sql;
+            $sentencia->execute(array($cedula, $nombre, $edad, $nadar, $direccion, $responsable, $curso));
+            return $pdo->lastInsertId();
+        } catch (PDOException $e) {
+            return $e;
+        }
+    }
 
-    
+
+
+
 
 
 

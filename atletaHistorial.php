@@ -1,8 +1,7 @@
 <?php include("funcionesSQL/atletaSQL.php");
 include("menus/atletaMenu.php");
 include("menus/menuGlobal.php");
-//REMPLAZAR POR LA VARIABLE GLOBAL DE CEDULA
-// @$cedula = "6-719-1951"; 
+
 ?>
 
 <!DOCTYPE html>
@@ -85,8 +84,6 @@ include("menus/menuGlobal.php");
 
                               //Toma el valor de la cedula con la que se logueo
                               $registro = AtletaSQL::obtenerHistorialPago($cedula);
-
-
                               foreach ($registro as $key => $data) {
                                 $recibo = $data['numerorecibo'];
                                 $curso = $data['idcur'];

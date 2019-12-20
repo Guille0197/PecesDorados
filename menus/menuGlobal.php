@@ -1,8 +1,12 @@
-
 <?php
-session_start();
-$cedula=$_SESSION['rol'];
 
+if (!isset($_SESSION)) {
+    session_start();
+}
+// session_start(); //Toma el valor de la variable declarada en el login
+
+$cedula = $_SESSION['cedula'];
+$usuario = $_SESSION['usuario'];
 ?>
 
 <head>
@@ -60,7 +64,7 @@ $cedula=$_SESSION['rol'];
                     <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
                     <!-- Aqui ira la imagen del usuario con el cual se registro -->
 
-                    <h3><?php echo  "variable global" ?></h3>
+                    <h3><?php echo  $usuario; ?></h3>
                     <!-- Aqui ira el nombre del usuario con el cual se registro -->
                 </li>
                 <!-- Menu Body -->

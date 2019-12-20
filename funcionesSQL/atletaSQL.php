@@ -71,7 +71,7 @@ class AtletaSQL
         try {
 
             $pdo = BaseDeDatos::obtenerBD()->obtenerConexion();
-            $sql = "SELECT ceduatleta, codicurso from registroatletacurso";
+            $sql = "SELECT ceduatleta, codicurso from registroatletacurso where ceduatleta = ? and codicurso = ?";
             $sentencia = $pdo->prepare($sql);
             $sentencia->execute(array($cedula, $curso));
             return $sentencia->fetchAll(PDO::FETCH_ASSOC);
@@ -80,6 +80,10 @@ class AtletaSQL
         }
     }
 
-}
-?>
 
+
+    
+
+
+
+}

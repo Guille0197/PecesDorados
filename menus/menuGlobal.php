@@ -1,3 +1,10 @@
+
+<?php
+session_start();
+$cedula=$_SESSION['rol'];
+
+?>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -45,7 +52,7 @@
         <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                 <img src="dist/img/user2-160x160.jpg" class="user-image img-circle elevation-2" alt="User Image" />
-                <span class="d-none d-md-inline"><?php echo "variable global aqui";  ?></span>
+                <span class="d-none d-md-inline"><?php echo $cedula;  ?></span>
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <!-- User image -->
@@ -60,7 +67,7 @@
                 <li class="user-body">
                     <div class="row">
                         <div class="col-12 text-center">
-                            <h3><?php echo "Rol";  ?></h3>
+                            <h3><?php echo $cedula;  ?></h3>
                             <!-- Aqui ira el rol del usuario con el cual se registro -->
                         </div>
                     </div>

@@ -73,6 +73,7 @@ session_start();
                         <li class="user-body">
                             <div class="row">
                                 <div class="col-12 text-center">
+                                
                                     <h3>Administrador</h3>
                                     <!-- Aqui ira el rol del usuario con el cual se registro -->
                                 </div>

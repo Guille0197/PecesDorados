@@ -37,8 +37,12 @@ if (isset($_POST['cedula']) && isset($_POST['password'])) {
 
       default:
     }
-  } else {
-    echo "Este usuario y/o conraseña son incorrectos";
+  } else {?>
+    <script lenguage=javascript>
+      alert("⚠ ERROR: Usuario y/o Contraseña Incorrecta ⚠");
+      window.location="login.php";
+    </script> 
+ <?php 
   }
 }
 
@@ -113,7 +117,7 @@ if (isset($_POST['cedula']) && isset($_POST['password'])) {
           <div class="row">
             <div class="col-12">
               <div class="icheck-primary">
-                <input type="checkbox" id="remember" required>
+                <input type="checkbox" id="remember">
                 <label for="remember">
                   Recordar usuario
                 </label>
@@ -128,9 +132,9 @@ if (isset($_POST['cedula']) && isset($_POST['password'])) {
           </div>
         </form>
 
-        <p class="text-center p-3">
+<!-- <p class="text-center p-3">
           <a href="#">Olvidé mi contraseña</a>
-        </p>
+        </p> -->
       </div>
       <!-- /.login-card-body -->
     </div>

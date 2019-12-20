@@ -3,19 +3,21 @@ include_once 'funcionesSQL/BaseDeDatos.php';
 session_start();
 
 
-if (isset($_POST['usuario']) && isset($_POST['password'])) {
-  $usuario = $_POST['usuario'];
+if (isset($_POST['cedula']) && isset($_POST['password'])) {
+  $cedula = $_POST['cedula'];
   $password = $_POST['password'];
   $db = new BaseDeDatos();
   $query = $db->obtenerConexion()->prepare('SELECT * FROM usuarios WHERE cedula= :cedula AND password=:password');
-  $query->execute(['cedula' => $usuario, 'password' => $password]);
+  $query->execute(['cedula' => $cedula, 'password' => $password]);
 
 
   $row = $query->fetch(PDO::FETCH_NUM);
   if ($row == true) {
     $rol = $row[5];
+    $username =$row[1];
     $_SESSION['rol'] = $rol;
-    $_SESSION['cedula']=$usuario;
+    $_SESSION['usuario']=$username;
+    $_SESSION['cedula']=$cedula;
 
     switch ($_SESSION['rol']) {
       case 1:
@@ -93,7 +95,7 @@ if (isset($_POST['usuario']) && isset($_POST['password'])) {
         </p>
         <form action="#" method="post">
           <div class="input-group mb-3">
-            <input type="text" class="form-control" name="usuario" placeholder="Cédula" required>
+            <input type="text" class="form-control" name="cedula" placeholder="Cédula" required>
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-envelope"></span>

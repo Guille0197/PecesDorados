@@ -1,3 +1,14 @@
+<?php
+
+if (!isset($_SESSION)) {
+    session_start();
+}
+// session_start(); //Toma el valor de la variable declarada en el login
+
+$usuario = $_SESSION['usuario'];
+?>
+
+
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -45,7 +56,7 @@
         <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
       </div>
       <div class="info">
-        <a href="#" class="d-block">Atleta</a>
+        <a href="atleta.php" class="d-block"> <?php  echo $usuario;   ?>    </a>
       </div>
     </div>
 

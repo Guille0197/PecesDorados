@@ -3,10 +3,6 @@ include("funcionesSQL/atletaSQL.php");
 include("menus/atletaMenu.php");
 include("menus/menuGlobal.php");
 
-
-
-
-
 ?>
 
 <!DOCTYPE html>

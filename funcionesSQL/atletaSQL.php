@@ -81,8 +81,35 @@ class AtletaSQL
     }
 
 
+    public static function registrarAdulto($cedula, $nombre, $parentesco, $celular, $edad)
+    {
+        try {
+            $pdo = BaseDeDatos::obtenerBD()->obtenerConexion();
+            $sql = "INSERT INTO adultoresponsable(idadulto,nombreadulto,parentescoadulto,celularadulto,edadadulto) values(?,?,?,?,?)";
+            $sentencia = $pdo->prepare($sql);
+            $sentencia->execute(array($cedula, $nombre, $parentesco, $celular, $edad));
+            return $pdo->lastInsertId();
+        } catch (PDOException $e) {
+            return $e;
+        }
+    }
+    public static function registrarAtleta($cedula, $nombre, $edad, $nadar, $direccion, $responsable, $curso)
+    {
+        try {
+            $pdo = BaseDeDatos::obtenerBD()->obtenerConexion();
+            $sql = "INSERT INTO atletas(cedulaatleta,nombreatleta,edadatleta,nadar,direccion,idrespo,idcur) values(?,?,?,?,?,?,?)";
+            $sentencia = $pdo->prepare($sql);
+            echo $sql;
+            $sentencia->execute(array($cedula, $nombre, $edad, $nadar, $direccion, $responsable, $curso));
+            return $pdo->lastInsertId();
+        } catch (PDOException $e) {
+            return $e;
+        }
+    }
 
-    
+
+
+
 
 
 

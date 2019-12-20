@@ -38,7 +38,7 @@ include("menus/menuGlobal.php");
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-  
+
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -67,7 +67,7 @@ include("menus/menuGlobal.php");
                           <option selected default disabled>Seleccione el curso</option>
 
                           <?php
-                         
+
                           foreach ($carrerabd as $key => $value) {
                             $idcurso = $value['idcurso'];
 
@@ -80,33 +80,27 @@ include("menus/menuGlobal.php");
                         <br>
 
 
-                        <!-- php aqui  -->
                         <?php
-                          // @$cedula = "6-719-1951";
 
-                          @$cedAtleta = $_GET["ceduatleta"];
-                          @$codigoCurso = $_GET["codicurso"];
 
-                          @$guardarInscripcion = $_POST["guardar"];
-                          @$valorSelectCurso = $_POST["curso"];
-                            
-                          
-                        //Validacion El atleta no se puede inscribir en el mismo curso.
+                        //@$cedAtleta = $_GET["ceduatleta"];
+                        @$guardarInscripcion = $_POST["guardar"];
+                        @$valorSelectCurso = $_POST["curso"];
 
-                        if($cedula == $cedAtleta And $codigoCurso == $valorSelectCurso){                          
-                         AtletaSQL::validacionAtleta($cedula, $codigoCurso);
-                        
-                          ?>
+                        if (@$guardarInscripcion) {
+                          $verificacion = AtletaSQL::validacionAtleta($cedula, $valorSelectCurso);
+                          if ($verificacion) {
+                        ?>
 
-                         <script> 
-                          alert('¡ADVERTENCIA! Usted ya está inscrito en este curso.'); 
-                          </script> 
+                            <script>
+                              alert('¡ADVERTENCIA! Usted ya está inscrito en este curso.');
+                            </script>
 
-                         <?php
-                        }else if (@$guardarInscripcion) {
-
+                        <?php
+                          } else {
                             AtletaSQL::inscribirAtleta($cedula, $valorSelectCurso);
                           }
+                        }
 
                         ?>
                         <input class='btn btn-warning' type='submit' name='guardar' value='Inscribir'>
@@ -147,15 +141,15 @@ include("menus/menuGlobal.php");
 
 
                       <?php
-                          @$cedula = "6-719-1951";//S REMPLAZAR POR LA VARIABLE GLOBAL DE CEDULA
-                          //Toma el valor de la cedula con la que se logueo
-                          $registro = AtletaSQL::obtenerCursos($cedula);
+                      @$cedula = "6-719-1951"; //S REMPLAZAR POR LA VARIABLE GLOBAL DE CEDULA
+                      //Toma el valor de la cedula con la que se logueo
+                      $registro = AtletaSQL::obtenerCursos($cedula);
 
 
-                          foreach ($registro as $key => $data) {
-                            $codigoCurso = $data['codicurso'];
-                            $horarioCurso = $data['horariocurso'];
-                            $entrenadorCodigo = $data['nombreentrenador'];
+                      foreach ($registro as $key => $data) {
+                        $codigoCurso = $data['codicurso'];
+                        $horarioCurso = $data['horariocurso'];
+                        $entrenadorCodigo = $data['nombreentrenador'];
                       ?>
 
                         <!-- echo "<td > $codigoCurso </td ";
@@ -170,7 +164,7 @@ include("menus/menuGlobal.php");
 
                       <?php
 
-                              }
+                      }
 
 
                       ?>

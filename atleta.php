@@ -3,6 +3,7 @@ session_start();
 include("menus/atletaMenu.php");
 include("menus/menuGlobal.php");
 
+
 if (!isset($_SESSION['rol'])) {
     header('location: login.php');
 } else {

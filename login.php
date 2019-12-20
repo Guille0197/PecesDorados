@@ -2,48 +2,20 @@
 include_once 'funcionesSQL/BaseDeDatos.php';
 session_start();
 
-// if (isset($_GET['cerrar_sesion'])) {
-//   session_unset();
-//   session_destroy();
-//   header('location: login.php');
-// }
-
-// if (isset($_SESSION['rol'])) {
-
-//   switch ($_SESSION['rol']) {
-//     case 1:
-
-//       header('location: indexAdmin.php');
-//       break;
-//     case 2:
-//       header('location: cajero.php');
-//       break;
-
-//     case 3:
-
-//       header('location: asistente.php');
-//       break;
-//     case 4:
-
-//       header('location: atleta.php');
-//       break;
-
-//     default:
-//   }
-// }
 
 if (isset($_POST['usuario']) && isset($_POST['password'])) {
   $usuario = $_POST['usuario'];
   $password = $_POST['password'];
   $db = new BaseDeDatos();
-  $query = $db->obtenerConexion()->prepare('SELECT * FROM usuarios WHERE usuario= :usuario AND password=:password');
-  $query->execute(['usuario' => $usuario, 'password' => $password]);
+  $query = $db->obtenerConexion()->prepare('SELECT * FROM usuarios WHERE cedula= :cedula AND password=:password');
+  $query->execute(['cedula' => $usuario, 'password' => $password]);
 
 
   $row = $query->fetch(PDO::FETCH_NUM);
   if ($row == true) {
     $rol = $row[5];
     $_SESSION['rol'] = $rol;
+    $_SESSION['cedula']=$usuario;
 
     switch ($_SESSION['rol']) {
       case 1:
@@ -69,6 +41,9 @@ if (isset($_POST['usuario']) && isset($_POST['password'])) {
 }
 
 ?>
+
+
+
 
 <!DOCTYPE html>
 <html>
@@ -118,7 +93,7 @@ if (isset($_POST['usuario']) && isset($_POST['password'])) {
         </p>
         <form action="#" method="post">
           <div class="input-group mb-3">
-            <input type="text" class="form-control" name="usuario" placeholder="Usuario" required>
+            <input type="text" class="form-control" name="usuario" placeholder="Cédula" required>
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-envelope"></span>

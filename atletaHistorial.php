@@ -152,30 +152,7 @@ include("menus/menuGlobal.php");
   <!-- AdminLTE for demo purposes -->
   <script src="js/demo.js"></script>
   <!-- page script -->
-  <!-- <script>
-    $(function() {
-      $("#example1").DataTable();
-      $('#example2').DataTable({
-        "paging": true,
-        "lengthChange": false,
-        "searching": false,
-        "ordering": true,
-        "info": true,
-        "autoWidth": false,
-        "language": {
-          "paginate": {
-            "next": "Siguiente",
-            "previous": "Anterior"
-          },
-          "info": "Mostrando _PAGE_ of _PAGES_ Resultados"
-        },
-      });
-
-
-
-
-    });
-  </script> -->
+ 
 
 
 </body>

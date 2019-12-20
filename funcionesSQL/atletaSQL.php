@@ -109,8 +109,16 @@ class AtletaSQL
 
 
 
-
-
-
-
+    public static function miPerfil($cedula)
+    {
+        try {
+            $pdo = BaseDeDatos::obtenerBD()->obtenerConexion();
+            $sql = "SELECT * from atletas where cedulaatleta = ? ";
+            $sentencia = $pdo->prepare($sql);
+            $sentencia->execute(array($cedula));
+            return $sentencia->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            return $e;
+        }
+    }
 }

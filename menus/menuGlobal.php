@@ -3,6 +3,20 @@
 if (!isset($_SESSION)) {
     session_start();
 }
+
+function CerrarSesion()
+{
+    session_start();
+    unset($_SESSION['cedula']);
+    unset($_SESSION['usuario']);
+    session_destroy();
+    //header('Location: login.php');
+}
+
+
+if (isset($_GET['cerrar'])) {
+    CerrarSesion();
+}
 // session_start(); //Toma el valor de la variable declarada en el login
 
 $cedula = $_SESSION['cedula'];
@@ -79,8 +93,10 @@ $usuario = $_SESSION['usuario'];
                 </li>
                 <!-- Menu Footer-->
                 <li class="user-footer">
-                    <a href="#" class="btn btn-default btn-flat">Perfil</a>
-                    <a href="#" class="btn btn-default btn-flat float-right">Cerrar Sesión</a>
+                    <?php
+
+                    ?>
+                    <a href="login.php?hello=cerrar" class="btn btn-default btn-flat float-right">Cerrar Sesión</a>
                 </li>
             </ul>
         </li>

@@ -44,69 +44,6 @@ if (!isset($_SESSION['rol'])) {
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 
-<body class="hold-transition sidebar-mini">
-    <div class="wrapper">
-        <!-- Navbar -->
-
-
-
-
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-
-
-         
-            <!-- /.content -->
-        </div>
-        <!-- /.content-wrapper -->
-
-
-        <!-- Control Sidebar -->
-
-        <!-- /.control-sidebar -->
-    </div>
-    <!-- ./wrapper -->
-
-
-    <!-- jQuery -->
-    <script src="jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <!-- DataTables -->
-    <script src="js/jquery.dataTables.js"></script>
-    <script src="js/dataTables.bootstrap4.js"></script>
-    <!-- AdminLTE App -->
-    <script src="js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="js/demo.js"></script>
-    <!-- page script -->
-    <!-- <script>
-    $(function() {
-      $("#example1").DataTable();
-      $('#example2').DataTable({
-        "paging": true,
-        "lengthChange": false,
-        "searching": false,
-        "ordering": true,
-        "info": true,
-        "autoWidth": false,
-        "language": {
-          "paginate": {
-            "next": "Siguiente",
-            "previous": "Anterior"
-          },
-          "info": "Mostrando _PAGE_ of _PAGES_ Resultados"
-        },
-      });
-
-
-
-
-    });
-  </script> -->
-
-
 </body>
 
 </html>

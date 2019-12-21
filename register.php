@@ -17,7 +17,7 @@ if(isset($_POST['Registrar'])){
             $pdoExec= $pdoResult->execute([':usuario' => $usuario, ':password' => $password, ':cedula' => $cedula, ':edad' => $edad, ':rol_id'=>$tipo ]);
         
             if($pdoExec){
-                header('location: atleta.php');
+                header('location: atletaAdulto.php');
             }   
         }else{
             ?>

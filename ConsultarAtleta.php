@@ -2,6 +2,11 @@
 include("funcionesSQL/atletaSQL.php");
 include("menus/atletaMenu.php");
 include("menus/menuGlobal.php");
+$carrerabd = AtletaSQL::obtenerCurso();
+
+$solbd = AtletaSQL::obtenerAdulto();
+
+
 
 ?>
 
@@ -11,7 +16,7 @@ include("menus/menuGlobal.php");
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Peces Dorados | Adulto Responsable</title>
+    <title>Peces Dorados | Consultar Atleta</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Font Awesome -->
@@ -60,69 +65,119 @@ include("menus/menuGlobal.php");
                             <br>
 
                             <?php
+                                @$guardarInscripcion = $_POST["guardar"];
+                                @$buscarInscripcion = $_POST["Consultar"];
+                                // Variables Atleta
+                                @$cedulaAtleta = $_POST["idAtleta"];
+                                @$nombreAtleta = $_POST["nombreAtleta"];
+                                @$edadAtleta = $_POST["edadAtleta"];
+                                @$conocimientoAtleta = $_POST["conocimientoAtleta"];
+                                @$direccionAtleta = $_POST["direccionAtleta"];
+                                @$cedulaAdultoResponsabelAtleta = $_POST["cedulaAdultoResponsableAtleta"];
+                                @$valorSelectCurso = $_POST["curso"];
 
-                            @$guardarInscripcion = $_POST["guardar"];
-                            // Variables Adulto
-                            @$cedulaAdulto = $_POST["idAdulto"];
-                            @$nombreAdulto = $_POST["nombreAdulto"];
-                            @$parentescoAdulto = $_POST["parentescoAdulto"];
-                            @$celularAdulto = $_POST["celularAdulto"];
-                            @$edadAdulto = $_POST["edadAdulto"];
-
-
-                            if (@$guardarInscripcion) {
 
                                 if (@$guardarInscripcion) {
-                                    $Inscripcion = AtletaSQL::registrarAdulto($cedulaAdulto, $nombreAdulto, $parentescoAdulto, $celularAdulto, $edadAdulto);
-                                    
-                                    @$cedulaAdulto = "";
-                                    @$nombreAdulto = "";
-                                    @$parentescoAdulto = "";
-                                    @$celularAdulto = "";
-                                    @$edadAdulto = "";
-
-                                    
+                                    $Inscripcion = AtletaSQL::inscribirAtleta($cedulaAtleta, $nombreAtleta, $edadAtleta, $conocimientoAtleta, $direccionAtleta, $cedulaAdultoResponsabelAtleta, $valorSelectCurso);
+                                    @$cedulaAtleta = "";
+                                    @$nombreAtleta = "";
+                                    @$edadAtleta = "";
+                                    @$conocimientoAtleta = "";
+                                    @$direccionAtleta = "";
+                                    @$cedulaAdultoResponsabelAtleta = "";
+                                    @$valorSelectCurso = "";
                                 } else {
                                 }
+                                 if (@$buscarInscripcion) {
+                                     $Inscripci = AtletaSQL::obtenerAtleta($cedulaAtleta);
+                                     if ($Inscripci) {
+                                     @$nombreAtleta =  $Inscripci['nombreatleta'];
+                                     @$edadAtleta =  $Inscripci['edadatleta'];
+                                     @$conocimientoAtleta = $Inscripci['nadar'];
+                                      @$direccionAtleta =  $Inscripci['direccion'];
+                                     @$cedulaAdultoResponsabelAtleta =  $Inscripci['idrespo'];
+                                     @$valorSelectCurso =  $Inscripci['idcur'];
+                                
                             }
+                                  else {
+                                           $mensaje="Cedula no existe";
+
+                                 }
+                             }
                             ?>
-                            <form method="POST" action="atletaAdulto.php">
-
-
-                                <!-- Inicio Adulto registro -->
+                            <form method="POST" action="ConsultarAtleta.php">
+                                <!-- Inicio Atletaregistro -->
                                 <div class="card">
                                     <div class="card-header">
-                                        <h3 class="card-title">Adulto responsable</h3>
+                                        <h3 class="card-title">Consultar Atleta</h3>
                                     </div>
                                     <div class="card-body p-0">
 
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Cédula</label>
-                                                <input type="text" class="form-control" id="exampleInputEmail1" name="idAdulto" required="require" placeholder="Ej: x-xxx-xxxx">
+                                                <input type="text" class="form-control" id="exampleInputEmail1" name="idAtleta" required="require" placeholder="Ej: x-xxx-xxxx">
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Nombre</label>
-                                                <input type="text" class="form-control" id="exampleInputEmail1" name="nombreAdulto" required="require" placeholder="Ej: Juan">
+                                                <input type="text" class="form-control" id="exampleInputEmail1" name="nombreAtleta"  placeholder="Ej: Juan">
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="exampleInputEmail1">Parentesco</label>
-                                                <input type="text" class="form-control" id="exampleInputEmail1" name="parentescoAdulto" required="require" placeholder="Ej: Padre">
-                                            </div>
-
-
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Teléfono celular</label>
-                                                <input type="text" class="form-control" id="exampleInputEmail1" name="celularAdulto" required="require" placeholder="Ej: xxxxx-xxxx">
-                                            </div>
-
-                                            <div class="form-group">
-
                                                 <label for="exampleInputEmail1">Edad</label>
-                                                <input type="number" min="18" max="90" class="form-control" required="require" id="exampleInputEmail1" name="edadAdulto" placeholder="Ej: 18">
+                                                <input type="text" class="form-control" id="exampleInputEmail1" name="edadAtleta"  placeholder="Ej: edad">
                                             </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Cedula de acudiente</label>
+                                                    <select class="form-control "  name="cedulaAdultoResponsableAtleta">
+                                                        <option selected default hidden></option>
+                                                        <?php
+                                                        foreach ($solbd as $key => $value) {
+                                                            $idadulto = $value['idadulto'];
+
+                                                            echo "<option value=$idadulto>$idadulto</option>";
+                                                        }
+                                                        ?>
+                                                    </select> 
+                                            </div>
+
+                                            <div class="form-group">
+
+                                                <label for="exampleInputEmail1">Direccion</label>
+                                                <select class="form-control" id="direccion" name="direccionAtleta" >
+                                                    <option default selected hidden></option>
+                                                    <option value="Monagrillo">Monagrillo</option>
+                                                    <option value="La Arena">La Arena</option>
+                                                    <option value="San Juan Bautista">San Juan Bautista</option>
+                                                    <option value="Llano Bonito">Llano Bonito</option>
+                                                    <option value="Chitré">Chitré</option>
+
+                                                </select>                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Conocimiento</label>
+                                                <select class="form-control" id="conocimiento" name="conocimientoAtleta" >
+                                                    <option default selected hidden></option>
+                                                    <option value="Si">Sabe nadar</option>
+                                                    <option value="No">No sabe nadar</option>
+                                                </select></div>
+                                           
+                                            <div class="form-group">
+                                                    <label for="exampleInputEmail1">Curso</label>
+                                                    <select class="form-control "  name="curso">
+                                                        <option selected default hidden></option>
+                                                        <?php
+                                                        foreach ($carrerabd as $key => $value) {
+                                                            $idcurso = $value['idcurso'];
+
+                                                            echo "<option value=$idcurso>$idcurso</option>";
+                                                        }
+                                                        ?>
+                                                    </select>               
+                                             </div>
                                             <input class='btn btn-warning' type='submit' name='guardar' value='Registrar'>
+                                            <input class='btn btn-warning' type='submit' name='Consultar' value='Consultar'>
+                                            <input class='btn btn-warning' type='submit' name='Actualizar' value='Actualizar'>
+                                            <input class='btn btn-warning' type='submit' name='Eliminar' value='Eliminar'>
                                         </div>
 
                                     </div>

@@ -75,10 +75,7 @@ include("menus/menuGlobal.php");
                           }
                           ?>
                         </select>
-
-
                         <br>
-
 
                         <?php
 
@@ -107,13 +104,7 @@ include("menus/menuGlobal.php");
 
                       </form>
                     </div>
-
-
                   </div>
-
-
-
-
 
                 </div>
 

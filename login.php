@@ -24,7 +24,6 @@ if (isset($_POST['cedula']) && isset($_POST['password'])) {
         header('location: indexAdmin.php');
         break;
       case 2:
-
         header('location: cajero.php');
         break;
       case 3:

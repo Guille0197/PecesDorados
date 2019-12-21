@@ -139,22 +139,7 @@ include("menus/menuGlobal.php");
   </div>
   <!-- ./wrapper -->
 
-
-  <!-- jQuery -->
-  <script src="jquery/jquery.min.js"></script>
-  <!-- Bootstrap 4 -->
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <!-- DataTables -->
-  <script src="js/jquery.dataTables.js"></script>
-  <script src="js/dataTables.bootstrap4.js"></script>
-  <!-- AdminLTE App -->
-  <script src="js/adminlte.min.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="js/demo.js"></script>
-  <!-- page script -->
- 
-
-
-</body>
-
-</html>
+<?php
+include('includes/scriptJS.php');
+include('includes/footer.php');
+?>

@@ -2,8 +2,10 @@
 include("funcionesSQL/atletaSQL.php");
 include("menus/atletaMenu.php");
 include("menus/menuGlobal.php");
-
 $carrerabd = AtletaSQL::obtenerCurso();
+
+
+
 
 ?>
 
@@ -13,7 +15,7 @@ $carrerabd = AtletaSQL::obtenerCurso();
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Peces Dorados | Dashboard</title>
+    <title>Peces Dorados | Consulta Entrenador</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Font Awesome -->
@@ -41,31 +43,6 @@ $carrerabd = AtletaSQL::obtenerCurso();
 <body class="hold-transition sidebar-mini">
 
 
-    <?php
-
-    @$guardarInscripcion = $_POST["guardar"];
-    // Variables Atleta
-    @$cedulaAtleta = $_POST["idAtleta"];
-    @$nombreAtleta = $_POST["nombreAtleta"];
-    @$edadAtleta = $_POST["edadAtleta"];
-    @$conocimientoAtleta = $_POST["conocimientoAtleta"];
-    @$direccionAtleta = $_POST["direccionAtleta"];
-    @$cedulaAdultoResponsabelAtleta = $_POST["cedulaAdultoResponsableAtleta"];
-    @$valorSelectCurso = $_POST["curso"];
-
-
-    if (@$guardarInscripcion) {
-        $Inscripcion = AtletaSQL::registrarAtleta($cedulaAtleta, $nombreAtleta, $edadAtleta, $conocimientoAtleta, $direccionAtleta, $cedulaAdultoResponsabelAtleta, $valorSelectCurso);
-        @$cedulaAtleta = "";
-        @$nombreAtleta = "";
-        @$edadAtleta = "";
-        @$conocimientoAtleta = "";
-        @$direccionAtleta = "";
-        @$cedulaAdultoResponsabelAtleta = "";
-        @$valorSelectCurso = "";
-    } else {
-    }
-    ?>
     <div class="wrapper">
 
 
@@ -86,105 +63,100 @@ $carrerabd = AtletaSQL::obtenerCurso();
                             <!-- general form elements -->
                             <br>
 
-                            <form method="POST" action="atletaRegistro.php">
-                                <!--Inicio Registro Atleta-->
+                            <?php
+
+                            @$guardarInscripcion = $_POST["guardar"];
+                            @$consultarInscripcion = $_POST["consultar"];
+                            // Variables Adulto
+                            @$cedulaAdulto = $_POST["idEntrenador"];
+                            @$nombreAdulto = $_POST["nombreEntrenador"];
+                            @$parentescoAdulto = $_POST["TelefonoEntrenador"];
+
+                            @$valorSelectCurso = $_POST["curso"];
+
+                            if (@$guardarInscripcion) {
+
+                                if (@$guardarInscripcion) {
+                                    $Inscripcion = AtletaSQL::registrarEntrenador($cedulaAdulto, $nombreAdulto ,$parentescoAdulto, $valorSelectCurso);
+                                    @$cedulaAdulto = "";
+                                    @$nombreAdulto = "";
+                                    @$parentescoAdulto = "";
+                                    @$valorSelectCurso = "";
+                                } else {
+                                }
+                            }
+                            if(@$consultarInscripcion){
+
+
+                            }
+                            ?>
+                            <form method="POST" action="ConsultarEntrenador.php">
+
+
+                                <!-- Inicio Adulto registro -->
                                 <div class="card">
                                     <div class="card-header">
-                                        <h3 class="card-title">Atleta</h3>
+                                        <h3 class="card-title">Consultar Entrenador </h3>
                                     </div>
                                     <div class="card-body p-0">
 
                                         <div class="card-body">
-                                        <div class="form-group">
-                                                <label>Cédula</label>
-                                                <input type="text" class="form-control" name="idAtleta" required="require" >
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Cédula</label>
+                                                <input type="text" class="form-control" id="exampleInputEmail1" name="idEntrenador" required="require" placeholder="Ej: x-xxx-xxxx">
                                             </div>
                                             <div class="form-group">
-                                                <label>Nombre</label>
-                                                <input type="text" class="form-control" name="nombreAtleta" required="require">
-                                            </div>
-
-                                            <div class="form-group">
-
-                                                <label>Edad</label>
-                                                <input type="number" min="1" max="35" class="form-control" required="require" name="edadAtleta" placeholder="Ej: 5">
+                                                <label for="exampleInputEmail1">Nombre</label>
+                                                <input type="text" class="form-control" id="exampleInputEmail1" name="nombreEntrenador" required="require" placeholder="Ej: Juan">
                                             </div>
 
                                             <div class="form-group">
-                                                <label>Dirección</label>
-                                                <select class="form-control" id="direccion" name="direccionAtleta" required="require">
-                                                    <option default selected disabled>Seleccione el distrito</option>
-                                                    <option value="Monagrillo">Monagrillo</option>
-                                                    <option value="La Arena">La Arena</option>
-                                                    <option value="San Juan Bautista">San Juan Bautista</option>
-                                                    <option value="Llano Bonito">Llano Bonito</option>
-                                                    <option value="Chitré">Chitré</option>
-
-                                                </select>
+                                                <label for="exampleInputEmail1">Telefono</label>
+                                                <input type="text" class="form-control" id="exampleInputEmail1" name="TelefonoEntrenador" required="require" placeholder="Ej: xxxx-xxxx">
                                             </div>
                                             <div class="form-group">
-                                                <label>Conocimiento</label>
-                                                <select class="form-control" id="conocimiento" name="conocimientoAtleta" required="require">
-                                                    <option default selected disabled>Conocimiento de natación</option>
-                                                    <option value="SabeNadar">Sé nadar</option>
-                                                    <option value="NoSabeNadar">No sé nadar</option>
-                                                </select>
-                                            </div>
+                                                    <label for="exampleInputEmail1">Curso</label>
+                                                    <select class="form-control "  name="curso">
+                                                        <option selected default hidden></option>
+                                                        <?php
+                                                        foreach ($carrerabd as $key => $value) {
+                                                            $idcurso = $value['idcurso'];
 
+                                                            echo "<option value=$idcurso>$idcurso</option>";
+                                                        }
+                                                        ?>
+                                                    </select>               
+                                             </div>
 
-                                            <div class="form-group">
-                                                <label>Cedula del aduto responsable</label>
-                                                <input type="text" class="form-control"  name="cedulaAdultoResponsableAtleta" required="require" placeholder="Ej: x-xx-xxx-xxx">
-                                            </div>
-
-                                            <div class="form-group">
-
-                                            <label for="exampleInputEmail1">Curso</label>
-                                            <select class="form-control form-control" required="require" name="curso">
-                                            <option selected default disabled>Seleccione el curso</option>
-
-                                            <?php
-
-                                            foreach ($carrerabd as $key => $value) {
-                                                $idcurso = $value['idcurso'];
-
-                                                echo "<option value=$idcurso>$idcurso</option>";
-                                            }
-                                            ?>
-                                            </select>
-
-
-                                            <br>
-
-
-                                            <!-- Inicio Codigo PHP  -->
-
-                                            <!-- Fin Codigo PHP  -->
-                                            <input class='btn btn-warning' type='submit' name='guardar' value='Inscribir'>
-
-
+                                            
+                                            <input class='btn btn-warning' type='submit' name='guardar' value='Registrar'>
+                                            <input class='btn btn-warning' type='submit' name='consultar' value='Consultar'>
+                                            <input class='btn btn-warning' type='submit' name='actualizar' value='Actualizar'>
+                                            <input class='btn btn-warning' type='submit' name='eliminar' value='Eliminar'>
+                                       
                                         </div>
-
-                                        </div>
-                                        <!-- /.card-body -->
-
-                                        
 
                                     </div>
 
                                 </div>
+                                <!-- Fin adulto Registro -->
+
+
+
+
+
                             </form>
-                            <!-- Fin  Registro Atleta -->
 
 
 
-                            </section>
+
+
                         </div>
                         <!-- /.content-wrapper -->
 
 
                         <!-- Control Sidebar -->
-                        
+
                         <!-- /.control-sidebar -->
                     </div>
                     <!-- ./wrapper -->

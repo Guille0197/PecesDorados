@@ -3,26 +3,12 @@
 if (!isset($_SESSION)) {
     session_start();
 }
-
-function CerrarSesion()
-{
-    session_start();
-    unset($_SESSION['cedula']);
-    unset($_SESSION['usuario']);
-    session_destroy();
-    //header('Location: login.php');
-}
-
-
-if (isset($_GET['cerrar'])) {
-    CerrarSesion();
-}
 // session_start(); //Toma el valor de la variable declarada en el login
 
 $cedula = $_SESSION['cedula'];
 $usuario = $_SESSION['usuario'];
-?>
 
+?>
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -87,12 +73,32 @@ $usuario = $_SESSION['usuario'];
                 </li>
                 <!-- Menu Footer-->
                 <li class="user-footer">
-                    <?php
-
-                    ?>
-                    <a href="login.php?hello=cerrar" class="btn btn-default btn-flat float-right">Cerrar Sesión</a>
+                <a href="atleta.php" class="btn btn-default btn-flat">Perfil</a>
+                <a href="#" data-toggle="modal" data-target="#logoutModal" class="btn btn-default btn-flat float-right">Cerrar Sesión</a>
                 </li>
             </ul>
         </li>
     </ul>
 </nav>
+
+
+<!-- Logout Modal de cerrar sesion-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">¿Preparado para irte <?php echo $usuario;?>?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Seleccione "Cerrar sesión" a continuación si está listo para finalizar su sesión
+                    actual.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-primary" href="cerrar.php">Cerrar sesión</a>
+                </div>
+            </div>
+        </div>
+    </div>

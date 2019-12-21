@@ -93,21 +93,18 @@ class AtletaSQL
             return $e;
         }
     }
-    public static function registrarAtleta($cedula, $nombre, $edad, $nadar, $direccion, $responsable, $curso)
+    public static function registrarAtleta($cedulaAtleta, $nombreAtleta, $edadAtleta, $conocimientoAtleta, $direccionAtleta, $cedulaAdultoResponsabelAtleta, $valorSelectCurso)
     {
         try {
             $pdo = BaseDeDatos::obtenerBD()->obtenerConexion();
             $sql = "INSERT INTO atletas(cedulaatleta,nombreatleta,edadatleta,nadar,direccion,idrespo,idcur) values(?,?,?,?,?,?,?)";
             $sentencia = $pdo->prepare($sql);
-            echo $sql;
-            $sentencia->execute(array($cedula, $nombre, $edad, $nadar, $direccion, $responsable, $curso));
+            $sentencia->execute(array($cedulaAtleta, $nombreAtleta, $edadAtleta, $conocimientoAtleta, $direccionAtleta, $cedulaAdultoResponsabelAtleta, $valorSelectCurso));
             return $pdo->lastInsertId();
         } catch (PDOException $e) {
             return $e;
         }
     }
-
-
 
     public static function miPerfil($cedula)
     {
@@ -121,4 +118,105 @@ class AtletaSQL
             return $e;
         }
     }
+
+    // Samuel  *************************************************************************************************************
+    public static function obtenerAdulto()
+    {
+        try {
+            $pdo = BaseDeDatos::obtenerBD()->obtenerConexion();
+            $sql = "SELECT idadulto from adultoresponsable ";
+            $sentencia = $pdo->prepare($sql);
+            $sentencia->execute();
+            return $sentencia->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            return $e;
+        }
+    }
+    public static function obtenerAtleta()
+    {
+        try {
+            $pdo = BaseDeDatos::obtenerBD()->obtenerConexion();
+            $sql = "SELECT   from atletas WHERE cedulaatleta=idAtleta";
+            $sentencia = $pdo->prepare($sql);
+            $sentencia->execute();
+            return $sentencia->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            return $e;
+        }
+    }
+
+
+    public static function registrarEntrenador($cedula, $nombre, $telefono)
+    {
+        try {
+
+            $pdo = BaseDeDatos::obtenerBD()->obtenerConexion();
+            $sql = "INSERT INTO entrenadores(cedulaentrenador,nombreentrenador,telefonoentrenador) values(?,?,?)";
+            $sentencia = $pdo->prepare($sql);
+            $sentencia->execute(array($cedula, $nombre, $telefono));
+            return $pdo->lastInsertId();
+        } catch (PDOException $e) {
+            return $e;
+        }
+    }
+    //samuel
+
+    // ****** Guillermo Navarro*****
+    public static function obtenterTodosAtletas()
+    {
+        try {
+            $pdo = BaseDeDatos::obtenerBD()->obtenerConexion();
+            $sql = "SELECT * from atletas";
+            $sentencia = $pdo->prepare($sql);
+            $sentencia->execute();
+            return $sentencia->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            return $e;
+        }
+    }
+
+    public static function obtenerAdultoAdd()
+    {
+        try {
+            $pdo = BaseDeDatos::obtenerBD()->obtenerConexion();
+            $sql = "SELECT idadulto, nombreadulto from adultoresponsable ";
+            $sentencia = $pdo->prepare($sql);
+            $sentencia->execute();
+            return $sentencia->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            return $e;
+        }
+    }
+
+    public static function registrarCajero($nombre, $passCajero,$cedula, $edad, $tipo)
+    {
+        try {
+
+            $pdo = BaseDeDatos::obtenerBD()->obtenerConexion();
+            $sql = "INSERT INTO usuarios(usuario,password,cedula,edad,rol_id) values(?,?,?,?,?)";
+            $sentencia = $pdo->prepare($sql);
+            $sentencia->execute(array($nombre, $passCajero,$cedula, $edad, $tipo));
+            return $pdo->lastInsertId();
+        } catch (PDOException $e) {
+            return $e;
+        }
+    }
+
+    public static function registrarAsistente($nombre, $passAsistente,$cedula, $edad, $tipo)
+    {
+        try {
+
+            $pdo = BaseDeDatos::obtenerBD()->obtenerConexion();
+            $sql = "INSERT INTO usuarios(usuario,password,cedula,edad,rol_id) values(?,?,?,?,?)";
+            $sentencia = $pdo->prepare($sql);
+            $sentencia->execute(array($nombre, $passAsistente,$cedula, $edad, $tipo));
+            return $pdo->lastInsertId();
+        } catch (PDOException $e) {
+            return $e;
+        }
+    }
+
+
+
+   
 }

@@ -3,7 +3,9 @@ include("funcionesSQL/atletaSQL.php");
 include("menus/atletaMenu.php");
 include("menus/menuGlobal.php");
 
-$carrerabd = AtletaSQL::obtenerCurso();
+
+
+
 
 ?>
 
@@ -13,7 +15,7 @@ $carrerabd = AtletaSQL::obtenerCurso();
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Peces Dorados | Dashboard</title>
+    <title>Peces Dorados | Adulto Responsable</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Font Awesome -->
@@ -41,31 +43,6 @@ $carrerabd = AtletaSQL::obtenerCurso();
 <body class="hold-transition sidebar-mini">
 
 
-    <?php
-
-    @$guardarInscripcion = $_POST["guardar"];
-    // Variables Atleta
-    @$cedulaAtleta = $_POST["idAtleta"];
-    @$nombreAtleta = $_POST["nombreAtleta"];
-    @$edadAtleta = $_POST["edadAtleta"];
-    @$conocimientoAtleta = $_POST["conocimientoAtleta"];
-    @$direccionAtleta = $_POST["direccionAtleta"];
-    @$cedulaAdultoResponsabelAtleta = $_POST["cedulaAdultoResponsableAtleta"];
-    @$valorSelectCurso = $_POST["curso"];
-
-
-    if (@$guardarInscripcion) {
-        $Inscripcion = AtletaSQL::registrarAtleta($cedulaAtleta, $nombreAtleta, $edadAtleta, $conocimientoAtleta, $direccionAtleta, $cedulaAdultoResponsabelAtleta, $valorSelectCurso);
-        @$cedulaAtleta = "";
-        @$nombreAtleta = "";
-        @$edadAtleta = "";
-        @$conocimientoAtleta = "";
-        @$direccionAtleta = "";
-        @$cedulaAdultoResponsabelAtleta = "";
-        @$valorSelectCurso = "";
-    } else {
-    }
-    ?>
     <div class="wrapper">
 
 
@@ -86,105 +63,90 @@ $carrerabd = AtletaSQL::obtenerCurso();
                             <!-- general form elements -->
                             <br>
 
-                            <form method="POST" action="atletaRegistro.php">
-                                <!--Inicio Registro Atleta-->
+                            <?php
+
+                            @$guardarInscripcion = $_POST["guardar"];
+                            // Variables Adulto
+                            @$cedulaAdulto = $_POST["idAdulto"];
+                            @$nombreAdulto = $_POST["nombreAdulto"];
+                            @$parentescoAdulto = $_POST["parentescoAdulto"];
+                            @$celularAdulto = $_POST["celularAdulto"];
+                            @$edadAdulto = $_POST["edadAdulto"];
+
+
+                            if (@$guardarInscripcion) {
+
+                                if (@$guardarInscripcion) {
+                                    $Inscripcion = atletaSQL::registrarAdulto($cedulaAdulto, $nombreAdulto, $parentescoAdulto, $celularAdulto, $edadAdulto);
+                                    @$cedulaAdulto = "";
+                                    @$nombreAdulto = "";
+                                    @$parentescoAdulto = "";
+                                    @$celularAdulto = "";
+                                    @$edadAdulto = "";
+                                } else {
+                                }
+                            }
+                            ?>
+                            <form method="POST" action="atletaAdulto.php">
+
+
+                                <!-- Inicio Adulto registro -->
                                 <div class="card">
                                     <div class="card-header">
-                                        <h3 class="card-title">Atleta</h3>
+                                        <h3 class="card-title">Adulto responsable</h3>
                                     </div>
                                     <div class="card-body p-0">
 
                                         <div class="card-body">
-                                        <div class="form-group">
-                                                <label>Cédula</label>
-                                                <input type="text" class="form-control" name="idAtleta" required="require" >
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Cédula</label>
+                                                <input type="text" class="form-control" id="exampleInputEmail1" name="idAdulto" required="require" placeholder="Ej: x-xxx-xxxx">
                                             </div>
                                             <div class="form-group">
-                                                <label>Nombre</label>
-                                                <input type="text" class="form-control" name="nombreAtleta" required="require">
-                                            </div>
-
-                                            <div class="form-group">
-
-                                                <label>Edad</label>
-                                                <input type="number" min="1" max="35" class="form-control" required="require" name="edadAtleta" placeholder="Ej: 5">
+                                                <label for="exampleInputEmail1">Nombre</label>
+                                                <input type="text" class="form-control" id="exampleInputEmail1" name="nombreAdulto" required="require" placeholder="Ej: Juan">
                                             </div>
 
                                             <div class="form-group">
-                                                <label>Dirección</label>
-                                                <select class="form-control" id="direccion" name="direccionAtleta" required="require">
-                                                    <option default selected disabled>Seleccione el distrito</option>
-                                                    <option value="Monagrillo">Monagrillo</option>
-                                                    <option value="La Arena">La Arena</option>
-                                                    <option value="San Juan Bautista">San Juan Bautista</option>
-                                                    <option value="Llano Bonito">Llano Bonito</option>
-                                                    <option value="Chitré">Chitré</option>
-
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Conocimiento</label>
-                                                <select class="form-control" id="conocimiento" name="conocimientoAtleta" required="require">
-                                                    <option default selected disabled>Conocimiento de natación</option>
-                                                    <option value="SabeNadar">Sé nadar</option>
-                                                    <option value="NoSabeNadar">No sé nadar</option>
-                                                </select>
+                                                <label for="exampleInputEmail1">Parentesco</label>
+                                                <input type="text" class="form-control" id="exampleInputEmail1" name="parentescoAdulto" required="require" placeholder="Ej: Padre">
                                             </div>
 
 
                                             <div class="form-group">
-                                                <label>Cedula del aduto responsable</label>
-                                                <input type="text" class="form-control"  name="cedulaAdultoResponsableAtleta" required="require" placeholder="Ej: x-xx-xxx-xxx">
+                                                <label for="exampleInputEmail1">Teléfono celular</label>
+                                                <input type="text" class="form-control" id="exampleInputEmail1" name="celularAdulto" required="require" placeholder="Ej: xxxxx-xxxx">
                                             </div>
 
                                             <div class="form-group">
 
-                                            <label for="exampleInputEmail1">Curso</label>
-                                            <select class="form-control form-control" required="require" name="curso">
-                                            <option selected default disabled>Seleccione el curso</option>
-
-                                            <?php
-
-                                            foreach ($carrerabd as $key => $value) {
-                                                $idcurso = $value['idcurso'];
-
-                                                echo "<option value=$idcurso>$idcurso</option>";
-                                            }
-                                            ?>
-                                            </select>
-
-
-                                            <br>
-
-
-                                            <!-- Inicio Codigo PHP  -->
-
-                                            <!-- Fin Codigo PHP  -->
-                                            <input class='btn btn-warning' type='submit' name='guardar' value='Inscribir'>
-
-
+                                                <label for="exampleInputEmail1">Edad</label>
+                                                <input type="number" min="18" max="90" class="form-control" required="require" id="exampleInputEmail1" name="edadAdulto" placeholder="Ej: 18">
+                                            </div>
+                                            <input class='btn btn-warning' type='submit' name='guardar' value='Registrar'>
                                         </div>
-
-                                        </div>
-                                        <!-- /.card-body -->
-
-                                        
 
                                     </div>
 
                                 </div>
+                                <!-- Fin adulto Registro -->
+
+
+
+
+
                             </form>
-                            <!-- Fin  Registro Atleta -->
 
 
 
-                            </section>
+
+
                         </div>
                         <!-- /.content-wrapper -->
 
 
                         <!-- Control Sidebar -->
-                        
+
                         <!-- /.control-sidebar -->
                     </div>
                     <!-- ./wrapper -->
